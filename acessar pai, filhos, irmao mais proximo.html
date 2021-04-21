@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            color: white;
+            background-color: #93d0ea;
+            font-family: sans-serif;
+            width: 180px;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    Clique sobre os objetos elementos parentes e descentes (obs.: veja o console)
+    <div id="cobras">Cobras
+        <ul id="venomous">Venenosas
+            <li>Jararaca</li>
+            <li>Cascável</li>
+        </ul>
+        <ul id="non-venomous">Sem veneno
+            <li>Python</li>
+            <li>Anaconda</li>
+        </ul>    
+    </div>
+    Clique em qualquer uma das aves para ver seus irmãos
+    <div>
+        Passáros
+        <ul id="passaros">
+            <li>Flamingo</li>
+            <li>Gaivota</li>
+            <li>Corvo</li>
+            <li>Maritaca</li>
+        </ul>
+    </div>
+    <script>
+        var cobras = document.querySelector('#cobras'),
+        passaros = document.querySelector('#passaros')
+
+        cobras.addEventListener('click', function(e){
+            // Para acessar o pai de um determinado elemento no DOM, usamos o método parentNode.
+            var pai = e.target.parentNode
+            console.log("Pai: " + pai.id)
+            // Pelo contrário, chamando o método .children recebe todos os elementos filhos do objeto selecionado.
+            console.log("Filhos: ")
+            var filhos = e.target.children
+            // Este retorna um HTMLCollection (um tipo de matriz), então temos que fazer uma iteração para acessar o 
+            //conteúdo de cada criança.
+            for (var i = 0; i < filhos.length; i++) {
+                console.log(filhos[i].textContent)
+            }
+        })
+
+        passaros.addEventListener('click', function (e) {
+            // Obtendo o irmão mais próximo de seu elemento
+            var anterior = e.target.previousElementSibling;
+            if (anterior) {
+                console.log("Irmão anterior: " + anterior.textContent)
+            }
+            var proximo = e.target.nextElementSibling
+            if (proximo) {
+                console.log("Próximo irmão: " + proximo.textContent)
+            }
+
+            // No entanto, para adquirir todos os irmãos de um nó é um pouco mais complexo.
+            // Temos que pegar todos os filhos de seu pai e, em seguida, excluir o elemento original.
+            // Isso é feito por meio de filtro e chama uma função que verifica todos os irmãos.
+            console.log("Todos irmãos: ")
+            Array.prototype.filter.call(e.target.parentNode.children, function (child) {
+                if (child !== e.target) {
+                    console.log(child.textContent)
+                }
+            })
+        })
+    </script>
+</body>
+</html>

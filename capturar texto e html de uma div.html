@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+   
+</head>
+<body>
+    <p id="no-jQuery"><strong> Texto padrão </strong></p>
+    <button>Alterar texto</button>
+    <br>
+    <button>Alterar conteúdo HTML</button>
+    <script>
+        var texto = document.querySelector("#no-jQuery"),
+            botao = document.querySelectorAll("button")
+
+        // Nós podemos facilmente obter o conteúdo de texto de um nó e todos os seus descendentes.
+        var conteudo = texto.textContent
+        console.log("textContent:  " + conteudo)
+
+        // Ao usar textContent para alterar o texto de um elemento
+        // Ele exclui o conteúdo antigo e substitui com um novo.
+        botao[0].addEventListener('click', function () {
+            texto.textContent = " Inserindo texto sem jQuery "
+        })
+
+        // Se for necessário pegar todo HTML em um nó (incluindo as tags) podemos usar innerHTML.
+        var html = texto.innerHTML;
+        console.log("innerHTML:  " + html)
+
+        // Para alterar o html simplesmente fornecemos um novo conteúdo.
+        // É claro que não se limitam somente a texto, pode ser inserido qualquer HTML.
+        botao[1].addEventListener('click', function () {
+            texto.innerHTML = "<button> Inserindo um botão sem jQuery </button>"
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .quadrado {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .esconder {
+            visibility: hidden;
+        }
+        .vermelho {
+            background-color: red;
+        }
+    </style>
+  
+</head>
+<body>
+    <div id='exemplo' class="quadrado"></div>
+    <button>Mostrar id</button>
+    <button>Mostrar classes</button>
+    <button>Vermelho</button>
+    <button>Alternar visibilidade</button>
+    <script>
+        var botao = document.querySelectorAll("button"),
+        div = document.querySelector("#exemplo")
+
+        botao[0].addEventListener("click", function (e) {
+            // Resgata o ID da div de forma fácil
+            console.log(div.id)
+            div.innerHTML = "ID: " + div.id
+        })
+
+        // O Elemento.classList guarda todas as classes do elemento.
+        var classes = div.classList
+
+        botao[1].addEventListener("click", function () {
+            console.log(classes)
+            div.innerHTML = "Classes: " + classes
+        })
+
+        botao[2].addEventListener("click", function () {
+            // Se for suportado, adicionará a classe vermelho.
+            classes.add("vermelho")
+        })
+
+        botao[3].addEventListener("click", function () {
+            // You can also toggle a class on and off
+            classes.toggle("esconder")
+        })
+    </script>
+</body>
+</html>

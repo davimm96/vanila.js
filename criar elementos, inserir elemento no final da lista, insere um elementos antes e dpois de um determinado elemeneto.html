@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Adicionar Batata Frita ao meu Sanduíche</button>
+    <button>Adicionar queijo ao Saunduíche</button>
+    <button>Remover pícles</button>
+
+    <h3>Almoço</h3>
+
+    <ul id="sanduiche">
+        <li>
+            <h4>Meu sanduíche</h4>
+        </li>
+        <li>Pão</li>
+        <li id="picles">Pícles</li>
+        <li id="bife">Bife</li>
+        <li>Molho</li>
+        <li>Pão</li>
+    </ul>
+    <script>
+        var sanduiche = document.querySelector("#sanduiche")
+        // Na guia HTML temos o nosso almoço para hoje.
+        // Vamos dizer que nós queremos adicionar batatas fritas.
+
+        var adicionarFritas = function () {
+            // Primeiro temos que criar nosso novo elemento e definir o seu conteúdo
+            var fritas = document.createElement("div")
+            fritas.innerHTML = '<li><h4> Batata Frita </h4></li>'
+            // Depois de feito isso, podemos usar appendChild para inserí-lo.
+            // Isso fará com que as suas batatas fritas aparecem no final da lista de almoço.
+            sanduiche.appendChild(fritas)
+        }
+
+        // Agora queremos adicionar queijo, tanto antes como depois do hambúrguer.
+        var adicionarQueijo = function () {
+            var bife = document.querySelector("#bife"),
+                emCima = document.createElement("li"),
+                emBaixo = document.createElement("li")
+
+            emBaixo.innerHTML = emCima.innerHTML = 'Queijo'
+
+            // Inserindo queijo na parte de cima:
+            // Pegue a "carne" e utilize insertBefore.
+            // O primeiro argumento para insertBefore é o novo elemento que vamos adicionar.
+            // O segundo argumento é o nó onde o novo elemento será inserido.
+            bife.parentNode.insertBefore(emCima, bife)
+
+            // Inserindo queijo na parte de baixo:
+            // Nós temos que usar um pequeno truque aqui!
+            // Vamos informar o próximo elemento depois de bife e inserir antes dele.
+            bife.parentNode.insertBefore(emBaixo, bife.nextSibling)
+        }
+
+        var removerPicles = function () {
+            // Finalmente, vamos remover
+            // Finalmente, queremos livrar-se dos picles!
+            var picles = document.querySelector("#picles")
+            if (picles) {
+                picles.parentNode.removeChild(picles)
+            }
+        }
+
+        // Botões
+        var btn = document.querySelectorAll("button")
+        btn[0].addEventListener('click', adicionarFritas)
+        btn[1].addEventListener('click', adicionarQueijo)
+        btn[2].addEventListener('click', removerPicles)
+    </script>
+</body>
+</html>

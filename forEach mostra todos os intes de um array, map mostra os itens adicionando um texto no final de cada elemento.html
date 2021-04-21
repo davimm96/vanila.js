@@ -1,0 +1,16 @@
+<p>Use o console</p>
+<script>
+    var tartarugasNinja = ["Donatello", "Leonardo", "Michelangelo", "Raphael"];
+
+    // ForEach iterai automaticamente através de uma matriz.
+    tartarugasNinja.forEach(function (ninja) {
+        console.log(ninja)
+    })
+
+    // O método mapa chama uma função em cada elemento de uma matriz e cria uma nova matriz com os resultados.
+    var amantesDaPizza = tartarugasNinja.map(function (ninja) {
+        return ninja.concat(" ama pizza!")
+    })
+
+    console.log(amantesDaPizza)
+</script>

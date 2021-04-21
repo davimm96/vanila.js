@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .green {
+            color: green;
+        }
+        .zoom {
+            cursor: pointer;
+            font-size: 23px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var botao = document.querySelectorAll("button"),
+            lista = document.querySelector("ul"),
+            itens = lista.querySelectorAll("li")
+            // Chamamos o método addEventListener em seu alvo evento desejado (neste caso, um botão).
+            // Isto irá iniciar um escuta que vai esperar até que um clique é gerado no elemento.
+
+            botao[0].addEventListener("click", function () {
+                // Quando este botão é clicado vamos ativar o zoom em nossa lista.
+                // Para fazer isso, adicione uma escuta de evento para a nossa própria lista
+                // Então quando o cursor estiver sobre ela, a função de ampliação é chamada.    
+                lista.addEventListener("mouseover", aumentar)
+            })
+
+            // Para desativar o zoom podemos simplesmente usar removeEventListener.
+            botao[1].addEventListener("click", function () {
+                // Remover escuta de eventos não funciona em funções anônimas, por isso sempre usar uma função nomeada.
+                lista.removeEventListener("mouseover", aumentar)
+            })
+
+            botao[2].addEventListener("click", function () {
+                console.log(itens)
+                // Remover as cores dos itens clicados
+                for(i=0;i<itens.length;i++){
+                    itens[i].classList.remove("green")   
+                }    
+            })
+
+            // Vamos criar a nossa função Ampliar.
+            var aumentar = function () {
+                // Adicione a classe zoom para a lista
+                lista.classList.add("zoom")
+                // Quando o cursos sair da lista, vamos retornar ao tamanho normal removendo a classe
+                lista.addEventListener("mouseout", function () {
+                    lista.classList.remove("zoom")
+                })
+            }
+
+            // Agora, queremos colorir os nomes clicando neles.
+            // Quando um 'clique' é registrado em um item da lista deverá mudar sua cor para verde.
+            // Graças a delegação de eventos podemos adicionar uma escuta para todos os itens simplesmente adicionando sobre ele a escuta de evento
+            // Desta forma, não precisamos adicionar escuta de eventos para cada item da lista <li>.
+            lista.addEventListener("click", function (e) {
+                // Faz a coloração acontecer somente ao elemento clicado.
+                e.target.classList.add('green')
+            })
+        }
+    </script>
+</head>
+<body>
+    <button>Habilitar zoom</button>
+    <button>Remover zoom</button>
+    <button>Remover Cores</button>
+    <br>
+    <br>Clique em algum item para vê-lo mudar de cor
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+</body>
+</html>
