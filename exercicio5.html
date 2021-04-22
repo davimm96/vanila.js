@@ -47,9 +47,11 @@
             var aumentar = function () {
                 // Adicione a classe zoom para a lista
                 lista.classList.add("zoom")
+                console.log("teste")
                 // Quando o cursos sair da lista, vamos retornar ao tamanho normal removendo a classe
                 lista.addEventListener("mouseout", function () {
                     lista.classList.remove("zoom")
+                    
                 })
             }
 
